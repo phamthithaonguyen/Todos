@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <title>Todos</title>
+</head>
+<body>
+  </br>
+  <h1> todos </h1>
+  <style>
+  body{
+    background: #F7F2F5;
+  }
+  h1 {
+    color: 	rgba(204, 134, 183, 0.534) ;
+    text-align: center;
+    font-size: 90px;
+    font-family: "Comic Sans MS";
+  }
+  ul {
+    margin: 0;
+    padding: 0;
+  }
+  ul li {
+    cursor: pointer;
+    position: relative;
+    list-style: none;
+    padding: 12px 8px 12px 40px;
+    background: #FCF6FB;
+    border: 1px solid #cdcdcd;
+    color: 	rgba(165, 40, 148, 0.945);
+    font-size: 21px;
+    font-family: "Times New Roman Bold";
+    box-shadow: 0 2px 4px 0 rgba(184, 106, 171, 0.212), 0 25px 50px 0 rgba(177, 105, 159, 0.116);
+  }
+  ul li:hover {
+    background:	rgba(229, 229, 240, 0.945);
+  }
+  ul li.checked {
+    color: 	rgba(166, 170, 221, 0.945);
+    text-decoration: line-through;
+  }
+  ul li.checked::before {
+    content: '';
+    position: absolute;
+    border-color: 	rgba(90, 72, 253, 0.945) ;
+    border-style: solid;
+    border-width: 0 2px 2px 0;
+    top: 12px;
+    left: 16px;
+    transform: rotate(45deg);
+    height: 20px;
+    width: 8px;
+  }
+  .close {
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 16px 16px 15px 16px;
+  }
+  .close:hover {
+    background-color:	rgb(0, 119, 255);
+    color: white;
+  }
+
+  input {
+    font-family: "Times New Roman Bold";
+    padding: 20px;
+  }
+  </style>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3"></div>
+      <div class="col-xs-6">
+        <div class="row">
+          <div style="overflow: hidden;">
+            <input type="text"; class="form-control"; placeholder="What needs to be done?"; id="new_todo" >
+          </div>
+        </div>
+        <div class="row">
+          <ul id="todolist">
+            <li> Hehe </li>
+            <li> Huhu </li>
+            <li> Hiuhiu </li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-xs-3"></div>
+    </div>
+  </div>
+</body>
+<script>
+  $(document).ready(function () {
+    $('li').click(function() {
+      $(this).toggleClass('checked');
+    });
+    let span_tag = '<span class="close">\u00D7</span>';
+    $('li').append(span_tag);
+    $('span').click(function(){
+      $(this).parent().hide();
+    });
+    $("#new_todo").keypress(function(event) {
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13') {
+        if ($("#new_todo").val().trim() == "") {
+          alert ("You must write something!")
+        }
+        else {
+          var add = $("#new_todo").val().trim();
+          var save = [];
+          save.push(add);
+          var add_li = "<li>" + add + "</li>";
+          $("#todolist").prepend(add_li);
+          $("#new_todo").val('');
+          $('li').first().click(function(){
+            $(this).toggleClass('checked');
+          });
+          let span_tag = '<span class="close">\u00D7</span>';
+          $('li').first().append(span_tag);
+          $('span').click(function(){
+            $(this).parent().hide();
+          });
+        }
+      }
+    });
+  });
+</script>
+</html>
